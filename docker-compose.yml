@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      - tika
+      - tensorflow
+  tika:
+    image: "apache/tika"
+    ports:
+      - "127.0.0.1:9998:9998"
+  tensorflow:
+    image: tensorflow/serving:latest
+    restart: unless-stopped
+    volumes:
+      - './models:/models'
+    command:
+      - '--model_config_file=/models/models.config'
+    ports:
+      - '127.0.0.1:8501:8501'

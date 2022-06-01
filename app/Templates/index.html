@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div class="container">
+   <h1>Upload Document (or .zip of documents) to Examine for Passwords</h1>
+   <hr>
+   <form class="form-inline" action="{{ url_for('index') }}" method="post" enctype="multipart/form-data">
+     <div class="form-group">
+       <input type="file" name="file" class="btn btn-default">
+     </div>
+     <br>
+     <div class="form-group">
+       Optional terms for regex, comma-separated :
+      <input type="text" name="regex_terms" class="btn btn-default">
+    </div>
+    <br>
+     <div class="form-group">
+       <input type="submit" value="Upload" class="btn btn-default">
+     </div>
+   </form>
+ </div>
+{% endblock %}

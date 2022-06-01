@@ -1,0 +1,4 @@
+flask
+flask-bootstrap
+numpy
+requests

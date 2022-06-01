@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h1>Document Results</h1>
+    <body>
+        {% if results is not none %} 
+            {% for result in results %}
+                <h3>{{ result.file_name }}</h3>
+
+                {% if result.model_password_candidates is not none and result.model_password_candidates|length > 0%} 
+                    <h4>Password Model Results</h4>
+                    {% for result in result.model_password_candidates %}
+                    <li> {{ " ".join(result["left_context"]) }} <b>{{ result["password"] }}</b> {{ " ".join(result["right_context"]) }} </li>
+                    {% endfor %}
+                    {% endif %}
+
+                {% if result.regex_password_candidates is not none and result.regex_password_candidates|length > 0%} 
+                    <h4>Password Regex results</h4>
+                    {% for result in result.regex_password_candidates %}
+                    <li> {{ " ".join(result["left_context"]) }} <b>{{ result["password"] }}</b> {{ " ".join(result["right_context"]) }} </li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if result.custom_regex_matches is not none and result.custom_regex_matches|length > 0%} 
+                <h4>Custom Regex results</h4>
+                {% for result in result.custom_regex_matches %}
+                <li> {{ " ".join(result["left_context"]) }} <b>{{ result["password"] }}</b> {{ " ".join(result["right_context"]) }} </li>
+                {% endfor %}
+            {% endif %}
+                <br>
+            {% endfor %}
+        {% else %}
+            <h3>No documents processed.</h3>
+        {% endif %}
+    </body>
+    <hr>
+    <a href="{{ url_for('index') }}" class="btn btn-default">Back</a>
+  </div>
+{% endblock %}
