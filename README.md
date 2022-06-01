@@ -2,6 +2,8 @@
 
 Dockerized application that analyzes documents for password candidates.
 
+The blogpost ["DeepPass — Finding Passwords With Deep Learning"](https://posts.specterops.io/deeppass-finding-passwords-with-deep-learning-4d31c534cd00) gives more detail on the approach and development of the model.
+
 To run: `docker-compose up`
 
 This will expose http://localhost:5000 where documents can be uploaded.
